@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecasting Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+    <header class="header">
+        <div>
+            <h1>Weather Forecast</h1>
+            <p>Check current weather and 10-day forecast</p>
+        </div>
+
+        <div class="header-right">
+            <div class="date-box">
+                <span>Today</span>
+                <strong id="currentDate">Loading...</strong>
+            </div>
+            <a href="#projectOverview" class="nav-about" id="aboutNavLink">
+                About
+            </a>
+            <div class="profile-container">
+                <button id="profileButton" class="profile-button" type="button">
+                    <img
+                        id="profileImage"
+                        class="profile-image"
+                        src="https://ui-avatars.com/api/?name=User"
+                        alt="Profile">
+        <div class="profile-name-box">
+                        <strong id="userName">User</strong>
+                        <span id="userEmail">user@email.com</span>
+                    </div>
+                    <span class="profile-arrow">▼</span>
+                </button>
+                <div id="profileMenu" class="profile-menu">
+                    <div class="profile-menu-header">
+                        <img
+                            id="menuProfileImage"
+                            class="menu-profile-image"
+                            src="https://ui-avatars.com/api/?name=User"
+                            alt="Profile">
+                        <div>
+                            <strong id="menuUserName">User</strong>
+                            <span id="menuUserEmail">user@email.com</span>
+                        </div>
+                    </div>
+                    <div class="profile-divider"></div>
+                    <div class="theme-selector">
+                        <button
+                            id="themeButton"
+                            class="profile-menu-item"
+                            type="button">
+                            <span>◐</span>
+                            <span>Choose Theme</span>
+                        </button>
+                        <div id="themeMenu" class="theme-menu">
+                            <button class="theme-option active" data-theme="light" type="button">
+                                <span class="theme-circle light-circle"></span>
+                                Light Theme
+                            </button>
+                            <button class="theme-option" data-theme="dark" type="button">
+                                <span class="theme-circle dark-circle"></span>
+                                Dark Theme
+                            </button>
+                            <button class="theme-option" data-theme="blue" type="button">
+                                <span class="theme-circle blue-circle"></span>
+                                Blue Theme
+                            </button>
+                            <button class="theme-option" data-theme="green" type="button">
+                                <span class="theme-circle green-circle"></span>
+                                Green Theme
+                            </button>
+                        </div>
+                    </div>
+                    <button
+                        id="logoutButton"
+                        class="profile-menu-item logout-item"
+                        type="button">
+                        <span>↪</span>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="search-section">
+        <div class="search-box">
+            <input
+                type="text"
+                id="cityInput"
+                placeholder="Enter city name">
+            <button
+                onclick="getWeather()"
+                class="search-button"
+                type="button">
+                Search
+            </button>
+        </div>
+        <button
+            type="button"
+            onclick="getCurrentLocation()"
+            class="location-button">
+            Use My Current Location
+        </button>
+        <p id="message"></p>
+    </section>
+    <main id="weatherContainer" class="weather-container hidden">
+        <section class="current-weather">
+            <div class="location-info">
+                <p>Current Weather</p>
+                <h2 id="location">City</h2>
+            </div>
+            <div class="main-weather">
+                <div class="weather-icon" id="currentIcon">☀️</div>
+                <div class="temperature">
+                    <span id="currentTemperature">--</span>
+                    <sup>°C</sup>
+                </div>
+                <div class="weather-description" id="currentDescription">
+                    Clear Sky
+                </div>
+            </div>
+            <div class="weather-details">
+                <div class="detail-card">
+                    <span class="detail-icon">💧</span>
+                    <div>
+                        <p>Humidity</p>
+                        <strong id="humidity">--%</strong>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <span class="detail-icon">💨</span>
+                    <div>
+                        <p>Wind Speed</p>
+                        <strong id="windSpeed">-- km/h</strong>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <span class="detail-icon">🌡️</span>
+                    <div>
+                        <p>Feels Like</p>
+                        <strong id="feelsLike">--°C</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="forecast-section">
+            <div class="forecast-header">
+                <div>
+                    <p>Weather Outlook</p>
+                    <h2>10-Day Forecast</h2>
+                </div>
+
+                <div class="scroll-buttons">
+                    <button
+                        class="scroll-btn"
+                        onclick="scrollForecast(-1)"
+                        aria-label="Scroll left"
+                        type="button"
+                    >
+                        &#10094;
+                    </button>
+
+                    <button
+                        class="scroll-btn"
+                        onclick="scrollForecast(1)"
+                        aria-label="Scroll right"
+                        type="button"
+                    >
+                        &#10095;
+                    </button>
+                </div>
+            </div>
+
+            <div class="forecast-wrapper" id="forecastWrapper">
+                <div class="forecast" id="forecast"></div>
+            </div>
+        </section>
+    </main>
+    <section id="welcome" class="welcome">
+        <div class="welcome-icon">🌤️</div>
+        <h2>Know Your Weather</h2>
+        <p>
+            Enter a city name above to view current weather
+            and a detailed 10-day forecast.
+        </p>
+    </section>
+<section id="placeSection" class="place-card" style="display: none;">
+    <h2 id="placeName">About the Location</h2>
+    <p id="placeDescription">
+        Search for a city to view information about the place.
+    </p>
+<div class="place-details">
+    <p>Country: <strong id="placeCountry">-</strong></p>
+    <p>Region: <strong id="placeRegion">-</strong></p>
+    <p>Latitude: <strong id="placeLatitude">-</strong></p>
+    <p>Longitude: <strong id="placeLongitude">-</strong></p>
+    <p>Timezone: <strong id="placeTimezone">-</strong></p>
+</div>
+<a id="wikipediaLink" href="#" target="_blank"
+   rel="noopener noreferrer" style="display: none;">
+    Read more about this place
+</a>
+</section>
+    <footer>
+        <p>Weather Forecasting Application</p>
+        <span>Powered by Open-Meteo</span>
+    </footer>
+</div>
+<section
+    class="project-overview"
+    id="projectOverview"
+    style="display: none;"
+>
+    <div class="overview-heading">
+        <p class="overview-label">WEATHER FORECAST</p>
+
+        <h2>About This Application</h2>
+
+        <p class="overview-subtitle">
+            Your simple and reliable weather companion
+            for checking current weather and planning ahead.
+        </p>
+    </div>
+
+    <div class="overview-description">
+        <h3>Weather Forecasting Application</h3>
+
+        <p>
+            The Weather Forecasting Application helps users
+            check current weather conditions for a selected
+            location and view a detailed 10-day forecast.
+        </p>
+
+        <p>
+            Users can search for a city or use their current
+            location to view temperature, humidity, wind speed,
+            feels-like temperature, and upcoming weather conditions.
+        </p>
+    </div>
+
+    <div class="overview-title">
+        <h3>What You Can Do</h3>
+    </div>
+
+    <div class="feature-grid">
+
+        <div class="overview-card">
+            <div class="overview-icon">🌡️</div>
+            <h3>Check Current Weather</h3>
+            <p>
+                View temperature, humidity, wind speed,
+                feels-like temperature, and weather conditions.
+            </p>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon">📅</div>
+            <h3>View 10-Day Forecast</h3>
+            <p>
+                Explore the forecast for the next ten days
+                and plan your activities.
+            </p>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon">🔍</div>
+            <h3>Search Any City</h3>
+            <p>
+                Search for a city to view its current weather
+                and forecast.
+            </p>
+        </div>
+     <div class="overview-card">
+            <div class="overview-icon">📍</div>
+            <h3>Use Current Location</h3>
+            <p>
+                Use your device's location to check nearby weather.
+            </p>
+        </div>
+
+        <div class="overview-card">
+            <div class="overview-icon">🎨</div>
+            <h3>Personalize Your View</h3>
+            <p>
+                Choose from different themes to personalize
+                your weather dashboard.
+            </p>
+        </div>
+
+    </div>
+</section>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const aboutLink = document.getElementById("aboutNavLink");
+    const projectOverview = document.getElementById("projectOverview");
+    if (projectOverview) {
+        projectOverview.style.display = "none";
+    }
+    if (aboutLink && projectOverview) {
+        aboutLink.addEventListener("click", function (event) {
+            event.preventDefault();
+
+            projectOverview.style.display = "block";
+
+            projectOverview.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        });
+    }
+});
+</script>
+</body>
+</html>

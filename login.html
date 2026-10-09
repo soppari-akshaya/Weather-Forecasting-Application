@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <meta
+        name="description"
+        content="Sign in to the Weather Forecast application to view current weather and a 10-day forecast.">
+    <title>Weather Forecast - Login</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main class="login-page">
+        <section
+            class="about-section"
+            aria-labelledby="appTitle">
+            <div class="about-content">
+                <h1 id="appTitle">
+                    Weather Forecast
+                </h1>
+                <p class="about-subtitle">
+                    Your simple and reliable weather companion
+                </p>
+                <p class="about-description">
+                    Weather Forecasting Application helps you
+                    check current weather conditions and explore
+                    a detailed 10-day forecast for your selected
+                    location.
+                </p>                
+                <div class="features">
+                    <div class="feature">
+                        <div
+                            class="feature-icon"
+                            aria-hidden="true" >
+                            🌤️
+                        </div>
+                        <div>
+                            <h3>Current Weather</h3>
+                            <p>
+                                View temperature, humidity,
+                                wind speed and feels-like
+                                temperature.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div
+                            class="feature-icon"
+                            aria-hidden="true"
+                        >
+                            📅
+                        </div>
+                    <div>
+                            <h3>10-Day Forecast</h3>
+
+                            <p>
+                                Plan ahead with detailed
+                                weather information for the
+                                next 10 days.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div
+                            class="feature-icon"
+                            aria-hidden="true"
+                        >
+                            📍
+                        </div>
+                        <div>
+                            <h3>Location Search</h3>
+                            <p>
+                                Search for any city or use
+                                your current location.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div
+                            class="feature-icon"
+                            aria-hidden="true">
+                            🌎
+                        </div>
+                        <div>
+                            <h3>Place Information</h3>
+                            <p>
+                                Discover useful information
+                                about the location you searched.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="powered-by">
+                    Powered by Open-Meteo
+                </div>
+          </div>
+
+        </section>
+        <section
+            class="login-section"
+            aria-label="Account login and registration">
+            <div class="login-card">                
+                <div id="loginForm">
+                    <h2>Welcome Back</h2>
+                    <p class="login-subtitle">
+                        Sign in to continue to your weather dashboard.
+                    </p>
+                    <label for="loginEmail">
+                        Email Address
+                    </label>
+                    <input
+                        type="email"
+                        id="loginEmail"
+                        name="loginEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required>
+                    <label for="loginPassword">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        name="loginPassword"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+                    <div class="forgot-row">
+                        <button
+                            type="button"
+                            id="forgotPassword"
+                            class="forgot-button">
+                            Forgot Password?
+                        </button>
+                    </div>
+                    <button
+                        type="button"
+                        id="loginButton"
+                        class="login-button">
+                        Login
+                    </button>
+                    <div
+                        class="divider"
+                        aria-hidden="true">
+                        <span>OR</span>
+                    </div>
+                    <button
+                        type="button"
+                        id="googleLogin"
+                        class="google-button">
+                        <span
+                            class="google-icon"
+                            aria-hidden="true"
+                        >
+                            G
+                        </span>
+                        <span>
+                            Continue with Google
+                        </span>
+                    </button>
+                    <p class="register-text">
+                        Don't have an account?
+                        <button
+                            type="button"
+                            id="showRegister"
+                            class="link-button"
+                        >
+                            Create Account
+                        </button>
+                    </p>
+                </div>
+                <div
+                    id="registerForm"
+                    style="display: none;">
+                 <h2>Create Account</h2>
+                    <p class="login-subtitle">
+                        Create an account to access the weather dashboard.
+                    </p>
+                    <label for="registerName">
+                        Full Name
+                    </label>
+                    <input
+                        type="text"
+                        id="registerName"
+                        name="registerName"
+                        placeholder="Enter your name"
+                        autocomplete="name"
+                        required>
+                    <label for="registerEmail">
+                        Email Address
+                    </label>
+                    <input
+                        type="email"
+                        id="registerEmail"
+                        name="registerEmail"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required>
+                    <label for="registerPassword">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        id="registerPassword"
+                        name="registerPassword"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="6"
+                        required>
+                    <button
+                        type="button"
+                        id="registerButton"
+                        class="login-button"
+                    >
+                        Create Account
+                    </button>
+                    <p class="register-text">
+                        Already have an account?
+                        <button
+                            type="button"
+                            id="showLogin"
+                            class="link-button"
+                        >
+                            Login
+                        </button>
+                    </p>
+                </div>
+                <p
+                    id="loginMessage"
+                    class="login-message"
+                    role="status"
+                    aria-live="polite"
+                ></p>
+            </div>
+        </section>
+    </main>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="login.js"></script>
+</body>
+</html>
